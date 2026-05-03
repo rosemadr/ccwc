@@ -1,6 +1,7 @@
 #!/usr/bin/env kotlin
 
 import java.io.File
+import java.nio.file.Files
 import kotlin.io.path.Path
 import kotlin.io.path.fileSize
 
@@ -11,11 +12,13 @@ if (args.isNotEmpty()) {
 
     val filePath = Path(filename)
     val lines = file.readLines()
+    val content = file.readText()
 
     when (args[0]) {
         "-c" -> printOutput(filePath.fileSize().toString(), filename)
-        "-l" -> printOutput(lines.size.toString() ,filename)
+        "-l" -> printOutput(lines.size.toString(), filename)
         "-w" -> printOutput(findWordCount(lines).toString(), filename)
+        "-m" -> printOutput( content.toList().size.toString(), filename)
         else -> print("invalid argument modifier")
     }
 }
